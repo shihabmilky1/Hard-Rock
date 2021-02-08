@@ -7,7 +7,9 @@ const searchSongs = () => {
         .then(data => displaySongs(data.data))
 }
 const displaySongs = songs => {
+    console.log(songs);
     const songContainer = document.getElementById('song-container')
+    songContainer.innerHTML = '';
     songs.forEach(song => {
     // console.log(song);
 
@@ -28,6 +30,12 @@ const displaySongs = songs => {
     });
 }
 const getLyrics = (artist , title) => {
-    // const url = `https://api.lyrics.ovh/v1/${artist}/${title}`
-    // console.log(url);
+    const url = `https://api.lyrics.ovh/v1/${artist}/${title}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayLyrics(data.lyrics))
+}
+const displayLyrics = lyrics => {
+    const lyricsDiv = document.getElementById('song-lyrics');
+    lyricsDiv.innerText= lyrics;
 }
